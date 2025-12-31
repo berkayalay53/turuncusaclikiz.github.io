@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
   <meta name="description" content="Turuncu Saçlı Kız — Berkay Alay. Sessizliğin içinden geçen bir hatıranın sayfası." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="./style.css" />
 </head>
 
@@ -16,14 +18,13 @@
   <div class="grain" aria-hidden="true"></div>
 
   <!-- =========================
-       A SEÇENEĞİ: KAPAK GİRİŞ PERDESİ
-       - cover.jpg arka plan (blur)
-       - "Devam et" ile çözülerek kaybolur
+       GİRİŞ PERDESİ (A SEÇENEĞİ)
+       Kapak arka plan + blur
   ========================== -->
-  <div id="introScreen" aria-hidden="false">
-    <div class="introBg" id="introBg" aria-hidden="true"></div>
+  <div id="introScreen">
+    <div class="introBg" id="introBg"></div>
 
-    <div class="introInner" role="dialog" aria-label="Giriş">
+    <div class="introInner">
       <p class="introKicker">Berkay Alay</p>
       <h1 class="introTitle">Turuncu Saçlı Kız</h1>
 
@@ -32,7 +33,7 @@
         <span>zamansız, mekânsız, ama gerçek.</span>
       </p>
 
-      <button id="introBtn" class="btn btn--primary" type="button" aria-label="Devam et">
+      <button id="introBtn" class="btn btn--primary">
         Devam Et
       </button>
 
@@ -40,27 +41,28 @@
     </div>
   </div>
 
-
-  <!-- HERO -->
+  <!-- =========================
+       HERO
+  ========================== -->
   <header class="hero">
     <div class="hero__inner">
 
-      <!-- Kapak görseli: cover.jpg -->
       <figure class="cover" id="coverWrap">
-        <img id="coverImg" src="./cover.jpg" alt="Turuncu Saçlı Kız kapak görseli" loading="eager" />
+        <img id="coverImg" src="./cover.jpg" alt="Turuncu Saçlı Kız kapak görseli" />
         <figcaption class="cover__caption">Turuncu Saçlı Kız</figcaption>
       </figure>
 
       <div class="title">
         <p class="kicker">Berkay Alay</p>
         <h1>Turuncu Saçlı Kız</h1>
+
         <p class="sub">
           Bu metin aceleyle okunmaz. Bazı şeyler, ancak satır aralarında durunca anlaşılır.
         </p>
 
         <div class="cta">
-          <a class="btn btn--primary" href="#oku">Okumaya Başla</a>
-          <button class="btn btn--ghost" type="button" id="toggleTheme">Gece Modu</button>
+          <a href="#oku" class="btn btn--primary">Okumaya Başla</a>
+          <button id="toggleTheme" class="btn">Gece Modu</button>
         </div>
 
         <p class="hint">
@@ -70,143 +72,150 @@
     </div>
   </header>
 
-
   <main class="main">
 
-    <section class="section section--quote" aria-label="Açılış alıntısı">
+    <!-- AÇILIŞ ALINTISI -->
+    <section class="section section--quote">
       <div class="wrap">
         <blockquote class="quote quote--hero">
-          <p>“Ben seni bir bakışta tanıdım. Ama sen beni hiçbir zaman fark etmedin. Ve fark etmemenin içinde öylesine bir adalet vardı ki... buna bile razı oldum. Sadece seni uzaktan görebilmek, bana uzun bir kış boyu yetecek kadar sıcaklık verdi.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Ben seni bir bakışta tanıdım. Ama sen beni hiçbir zaman fark etmedin.
+            Ve fark etmemenin içinde öylesine bir adalet vardı ki... buna bile razı oldum.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
       </div>
     </section>
 
-    <section class="section" aria-label="Kısa not">
+    <!-- NOT -->
+    <section class="section">
       <div class="wrap">
         <div class="note">
           <p>
-            Bu sayfa bir “tanıtım” değil; bir “durak”.
+            Bu sayfa bir tanıtım değil; bir durak.
             Burada birine yaklaşmak değil, bir anı yerinde tutmak var.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="section section--grid" aria-label="Seçilmiş alıntılar">
+    <!-- ALINTILAR -->
+    <section class="section section--grid">
       <div class="wrap grid">
+
         <blockquote class="quote">
-          <p>“Ben seni o gün değil, seni ilk gördüğüm gün değil... seni fark ettiğim gün sevdim. Belki daha önce görmüşümdür. Belki aynı koridorlarda yürüdük, aynı kapıdan geçtik. Ama kalbim seni ilk ne zaman tanıdıysa, işte o gün başladım sana içimden seslenmeye. Sana hiç dokunmadan, seni hiç durdurmadan... sadece uzaktan bir şarkı gibi sevdim seni.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Seni fark ettiğim gün sevdim. Sana hiç dokunmadan, seni hiç durdurmadan…
+            sadece uzaktan bir şarkı gibi.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
 
         <blockquote class="quote">
-          <p>“Seninle aynı bankta oturmadık belki. Ama bir gün seni bahçede tek başına otururken görmüştüm. Yanında olmak istemedim. Çünkü yalnızlığın bir zarafeti vardı. Sadece izledim. Rüzgâr saçlarını geriye doğru savuruyordu... O gün karar verdim: bu defteri yazacağım. Sana değil. Ama senin yüzünden.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Yanında olmak istemedim. Çünkü yalnızlığının bir zarafeti vardı.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
 
         <blockquote class="quote">
-          <p>“Seninle konuşmadık. Ama bir sessizlik paylaştık. Ve o sessizlik, şimdiye kadar başkalarıyla paylaştığım tüm cümlelerden daha gerçekti. Sana hiçbir zaman söylemeyeceğim cümlelerim var; onları yazdım.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Bir sessizlik paylaştık. O sessizlik, bütün cümlelerden daha gerçekti.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
 
         <blockquote class="quote">
-          <p>“Belki bir gün sorarsın kendine: ‘Beni hiç gerçekten tanıyan oldu mu?’ O zaman bil ki, evet, seni hiç tanımadan tanıyan biri vardı... Seninle konuşamadığım her an, sana en çok yaklaştığım andı belki de.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Seninle konuşamadığım her an, sana en çok yaklaştığım andı.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
+
       </div>
     </section>
 
-    <!-- OKUMA (PDF YOK / YAZILMAKTADIR) -->
-    <section class="section section--reader" id="oku" aria-label="Okuma">
+    <!-- OKUMA -->
+    <section class="section section--reader" id="oku">
       <div class="wrap">
-        <div class="readerTop">
-          <h2>Okuma</h2>
-          <p class="readerSub">
-            PDF eklenmemiştir. Turuncu Saçlı Kız şu an yazılmaktadır.
-          </p>
+        <h2>Okuma</h2>
+        <p class="readerSub">
+          Turuncu Saçlı Kız şu an yazılmaktadır.
+        </p>
 
-          <div class="note">
-            <p>
-              Bu sayfa dijital yayın değildir; bir sergi odası gibi kalsın istedim.
-              Okur burada “tam metni” değil, metnin bıraktığı izi görür.
-            </p>
-          </div>
+        <div class="note">
+          <p>
+            Bu sayfa dijital bir yayın değildir.
+            Bir sergi odası gibi kalsın istedim.
+          </p>
         </div>
 
         <blockquote class="quote quote--closing">
-          <p>“Eğer bir gün bu kitabı okurken kalbinin bir yeri sızlarsa, bil ki ben de aynı sayfada durmuş, seni bekliyordum.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Ben bu sayfada kaldım. Sen geçsen bile.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
       </div>
     </section>
 
-    <section class="section section--footer" aria-label="Alt bilgi">
+    <!-- FOOTER -->
+    <section class="section section--footer">
       <div class="wrap footer">
-        <div class="sig">
+        <div>
           <p class="sig__name">Berkay Alay</p>
           <p class="sig__meta">Yazar Sayfası • Turuncu Saçlı Kız</p>
         </div>
 
         <div class="links">
-          <a href="https://books2read.com/berkayalay" target="_blank" rel="noopener">Yazar sayfası</a>
+          <a href="https://books2read.com/berkayalay" target="_blank">Yazar Sayfası</a>
         </div>
       </div>
     </section>
+
   </main>
 
-
   <script>
-    // Kapak görseli yoksa estetik fallback (hero cover)
-    const img = document.getElementById('coverImg');
-    img.addEventListener('error', () => {
-      const wrap = document.getElementById('coverWrap');
-      wrap.classList.add('cover--fallback');
-      img.remove();
-    });
+    /* Kapak fallback */
+    const coverImg = document.getElementById('coverImg');
+    coverImg.onerror = () => {
+      document.getElementById('coverWrap').classList.add('cover--fallback');
+      coverImg.remove();
+    };
 
-    // Tema: localStorage ile hatırlasın
+    /* Tema */
     const toggle = document.getElementById('toggleTheme');
     const key = 'ba_theme';
-    const saved = localStorage.getItem(key);
-    if (saved === 'night') document.documentElement.classList.add('night');
-
-    toggle.addEventListener('click', () => {
+    if (localStorage.getItem(key) === 'night') {
+      document.documentElement.classList.add('night');
+    }
+    toggle.onclick = () => {
       document.documentElement.classList.toggle('night');
-      localStorage.setItem(key, document.documentElement.classList.contains('night') ? 'night' : 'day');
-    });
+      localStorage.setItem(
+        key,
+        document.documentElement.classList.contains('night') ? 'night' : 'day'
+      );
+    };
 
-    // =========================
-    // GİRİŞ PERDESİ (A)
-    // cover.jpg arka plan olarak bas
-    // =========================
+    /* Giriş perdesi */
     const intro = document.getElementById('introScreen');
     const introBg = document.getElementById('introBg');
     const introBtn = document.getElementById('introBtn');
 
-    // sayfa açılınca kilitle
     document.body.style.overflow = 'hidden';
 
-    // intro bg: cover.jpg varsa kullan
-    const coverUrl = './cover.jpg';
-    const testImg = new Image();
-    testImg.onload = () => {
-      introBg.style.backgroundImage = `url('${coverUrl}')`;
-      intro.classList.add('hasCover');
-    };
-    testImg.onerror = () => {
-      // kapak yoksa da sorun değil: CSS fallback zemin kalır
-      intro.classList.add('noCover');
-    };
-    testImg.src = coverUrl;
+    const img = new Image();
+    img.onload = () => introBg.style.backgroundImage = "url('./cover.jpg')";
+    img.src = './cover.jpg';
 
-    introBtn.addEventListener('click', () => {
+    introBtn.onclick = () => {
       intro.classList.add('hide');
       setTimeout(() => {
         intro.remove();
         document.body.style.overflow = '';
       }, 900);
-    });
+    };
   </script>
+
 </body>
 </html>
