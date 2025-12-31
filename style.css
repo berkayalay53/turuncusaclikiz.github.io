@@ -1,255 +1,313 @@
-/* TURUNCU SAÇLI KIZ - EDİTÖRÜN RUHU 
-  Atmosfer: Loş, Sessiz, Sinematik.
-*/
+:root{
+  --bg: #0f1113;
+  --bg2:#14181b;
+  --card:#161a1e;
+  --text:#e9e6df;
+  --muted:#bcb6aa;
+  --line: rgba(255,255,255,.10);
 
-:root {
-  /* Renk Paleti: Gecenin tonları ve eski kağıt sıcaklığı */
-  --bg-deep: #0a0a0a;       /* En derin siyah */
-  --bg-panel: #141414;      /* Hafif açık siyah (kartlar için) */
-  --text-main: #e0ded9;     /* Kırık beyaz, gözü yormaz */
-  --text-muted: #888888;    /* Sönük metinler */
-  --accent: #d4a373;        /* Turuncu/Toprak tonu (Vurgular için) */
-  
-  --line: rgba(255, 255, 255, 0.08); /* Çok ince çizgiler */
-  
-  /* Fontlar */
-  --font-serif: "Crimson Pro", Georgia, serif; /* Duygular için */
-  --font-sans: "Inter", sans-serif;            /* Bilgiler için */
+  --accent:#d4a373;
+  --accent2:#86a8a2;
+
+  --serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
+  --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --radius: 22px;
+  --shadow: 0 16px 50px rgba(0,0,0,.45);
 }
 
-/* --- TEMEL AYARLAR --- */
-* {
-  box-sizing: border-box;
+html{
+  /* Intro olduğu için smooth scroll'u başlangıçta kapatıyoruz, geçişten sonra açılabilir ama şart değil */
+  /* scroll-behavior:smooth; */
+  background: var(--bg); /* Arka planı sabitledik */
+  color: var(--text);
+  height: 100%; /* Tam ekran intro için gerekli */
 }
 
-html {
-  scroll-behavior: smooth; /* Kaydırma efekti ipek gibi olsun */
+/* html.night sınıfı artık gereksiz */
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  font-family: var(--sans);
+  letter-spacing: .2px;
+  height: 100%;
 }
 
-body {
-  margin: 0;
-  background-color: var(--bg-deep);
-  color: var(--text-main);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased; /* Yazılar daha pürüzsüz */
+a{ color: var(--text); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+.grain{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.16;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  z-index: 9999; /* Her şeyin üzerinde */
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.wrap{
+  width:min(1000px, calc(100% - 36px));
+  margin-inline:auto;
 }
 
-/* --- FİLM GRENİ (Grain Effect) --- */
-/* Ekrana hafif bir kumlama ekler, dijital soğukluğu kırar */
-.grain {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* --- GİRİŞ EKRANI (INTRO) --- */
+/* --- YENİ GİRİŞ EKRANI STİLLERİ --- */
 .intro-screen {
-  position: relative;
-  height: 100vh;
-  width: 100%;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: var(--bg);
 }
 
-/* Arka Plandaki Bulanık Görsel */
 .intro-bg {
   position: absolute;
-  inset: 0;
-  background-image: url('./cover.jpg'); /* Görselin yolu */
+  inset: -20px; /* Kenar boşluklarını gizlemek için taşırıyoruz */
   background-size: cover;
   background-position: center;
-  /* Sihir burada: Resmi bulanıklaştırıp karartıyoruz */
-  filter: blur(20px) brightness(0.35); 
-  transform: scale(1.1); /* Blur kenarları bozmasın diye biraz büyütüyoruz */
+  filter: blur(18px) brightness(0.35);
+  transform: scale(1.1); /* Blur'un kenarları bozmasını önlemek için büyütüyoruz */
   z-index: 1;
 }
 
-/* Giriş İçeriği */
 .intro-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 0 20px;
-  animation: fadeUp 1.8s ease-out forwards;
-}
-
-.author-name {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 4px; /* Harf aralarını açarak nefes aldırıyoruz */
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 16px;
-}
-
-.book-title {
-  font-family: var(--font-serif);
-  font-weight: 300;
-  font-size: clamp(3rem, 6vw, 5rem); /* Responsive yazı boyutu */
-  line-height: 1.1;
-  margin: 0 0 24px;
+  padding: 20px;
   color: #fff;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  /* İçerik yavaşça belirsin */
+  animation: fadeIn 1.2s ease-out 0.3s both;
 }
 
-.book-sub {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 40ch; /* Satır çok uzamasın */
-  margin: 0 auto 48px;
-}
-
-/* Buton Tasarımı */
-.btn-enter {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 100px; /* Hap şeklinde */
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(4px);
-  color: var(--text-main);
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.btn-enter:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: var(--accent);
-  padding-right: 40px; /* Hover olunca hafif uzasın */
-}
-
-/* --- ANA İÇERİK (SERGİ ALANI) --- */
-.main {
-  position: relative;
-  z-index: 10;
-  background: var(--bg-deep);
-  box-shadow: 0 -40px 100px rgba(0,0,0,1); /* Giriş ile yumuşak geçiş */
-  padding-bottom: 100px;
-}
-
-.wrap {
-  width: min(1000px, 90%); /* İçerik genişliği */
-  margin: 0 auto;
-}
-
-.section {
-  padding: 80px 0;
-  border-bottom: 1px solid var(--line);
-}
-.section:last-child { border-bottom: none; }
-
-/* --- ALINTILAR (Eserler) --- */
-.quote {
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  position: relative;
-}
-
-/* Büyük açılış alıntısı */
-.quote--hero p {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  line-height: 1.5;
-  text-align: center;
-  color: var(--text-main);
-}
-
-/* Grid Alıntılar */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 60px;
-  align-items: start;
-}
-
-.section--grid .quote p {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.85);
-}
-
-/* Alıntı süslemesi (Sol çizgi yerine daha zarif bir şey) */
-.quote::before {
-  content: '“';
-  font-family: var(--font-serif);
-  font-size: 60px;
-  color: rgba(255,255,255,0.1);
-  position: absolute;
-  top: -30px;
-  left: -10px;
-  pointer-events: none;
-}
-
-/* --- PDF OKUMA BÖLÜMÜ --- */
-.section--reader {
-  text-align: center;
-  padding: 100px 0;
-}
-
-.section--reader h2 {
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
+.intro-title {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 8vw, 6rem);
   font-weight: 300;
-  margin-bottom: 10px;
+  margin: 10px 0 20px;
+  line-height: 1;
+  text-shadow: 0 5px 30px rgba(0,0,0,0.6);
 }
 
-.readerSub {
-  color: var(--text-muted);
-  margin-bottom: 30px;
+.intro-sub {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  max-width: 42ch;
+  margin: 0 auto 40px;
 }
 
-.btn--primary {
-  display: inline-block;
-  padding: 16px 40px;
-  background: var(--text-main);
-  color: var(--bg-deep);
-  border-radius: 4px;
+/* Şık "Devam Et" butonu */
+.btn--enter {
+  padding: 16px 38px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: var(--sans);
   font-weight: 500;
-  letter-spacing: 0.5px;
-}
-.btn--primary:hover {
-  background: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* --- ALT BİLGİ (Footer) --- */
-.footer {
-  padding-top: 40px;
-  text-align: center;
-  opacity: 0.4;
+.btn--enter:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+}
+
+/* --- ANİMASYONLAR --- */
+/* Belirme Animasyonu */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Kaybolma Animasyonu (Intro için) */
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* --- ANA İÇERİK DÜZENLEMESİ --- */
+.main {
+  /* Başlangıçta gizli */
+  display: none;
+  opacity: 0;
+  padding-top: 100px; /* Intro'dan sonra üstten boşluk */
+  min-height: 100vh;
+}
+
+/* JS ile eklenecek sınıf: İçeriği göster */
+.main.visible {
+  display: block !important;
+  /* İçerik de yavaşça belirsin */
+  animation: fadeIn 1s ease-out both;
+}
+
+/* ESKİ .hero STILLERİNİ KALDIRDIM */
+
+.section{
+  padding: 26px 0;
+}
+
+.section--quote{ padding-top: 22px; }
+
+.note{
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+  padding: 16px 18px;
+  color: rgba(233,230,223,.78);
+  line-height:1.7;
+  text-align: center; /* Notu merkeze aldım, daha şık durur */
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.quote{
+  margin:0;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+  padding: 18px 18px 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.18);
+}
+.quote p{
+  margin:0;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.75;
+  letter-spacing: .1px;
+}
+.quote footer{
+  margin-top: 12px;
+  color: rgba(233,230,223,.62);
+  font-size: 13px;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  font-family: var(--sans);
+}
+
+.quote--hero{
+  padding: 32px; /* Biraz daha genişlettim */
+  background:
+    radial-gradient(700px 300px at 30% 15%, rgba(212,163,115,.12), transparent 60%),
+    rgba(255,255,255,.02);
+}
+.quote--hero p{ font-size: 24px; line-height: 1.6; } /* Ana alıntıyı büyüttüm */
+
+.section--reader h2{
+  margin:0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing:.2px;
+}
+.readerSub{
+  margin: 8px 0 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.readerActions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.btn{
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+  color: var(--text);
+  cursor:pointer;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.16);
+}
+.btn--primary{
+  border-color: rgba(212,163,115,.35);
+  background: linear-gradient(180deg, rgba(212,163,115,.18), rgba(212,163,115,.08));
+}
+.btn--primary:hover{
+  border-color: rgba(212,163,115,.55);
+}
+.btn--ghost { /* İndir butonu için */
+  background: transparent;
+  border-color: var(--line);
+}
+.btn--ghost:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.2);
+}
+
+
+.quote--closing{
+  margin-top: 16px;
+  background:
+    radial-gradient(520px 260px at 70% 45%, rgba(134,168,162,.12), transparent 60%),
+    rgba(255,255,255,.02);
+}
+
+.section--footer{
+  padding-top: 20px;
+}
+.footer{
+  display:flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  border-top:1px solid var(--line);
+  padding-top: 18px;
+}
+.sig__name{
+  margin:0;
+  font-family: var(--serif);
+  font-size: 18px;
+}
+.sig__meta{
+  margin:4px 0 0;
+  color: var(--muted);
   font-size: 13px;
 }
-.footer p { margin: 0; margin-bottom: 5px; letter-spacing: 1px; }
-
-/* --- ANİMASYON --- */
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
+.links a{
+  color: rgba(233,230,223,.75);
+  font-size: 13px;
+  border:1px solid var(--line);
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.02);
+}
+.links a:hover{
+  text-decoration:none;
+  border-color: rgba(255,255,255,.16);
 }
 
-/* Mobil Düzenlemeler */
-@media (max-width: 768px) {
-  .section { padding: 50px 0; }
-  .grid { gap: 40px; }
-  .book-title { font-size: 3rem; }
+/* Mobil */
+@media (max-width: 900px){
+  .grid{
+    grid-template-columns: 1fr;
+  }
+  .quote p{ font-size: 17px; }
+  .quote--hero p{ font-size: 20px; }
+  .intro-title { font-size: 3.5rem; } /* Mobilde başlık boyutu */
 }
