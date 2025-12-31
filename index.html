@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
   <meta name="description" content="Turuncu Saçlı Kız — Berkay Alay. Sessizliğin içinden geçen bir hatıranın sayfası." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="./style.css" />
 </head>
 
@@ -29,6 +31,7 @@
   </header>
 
   <main class="main" id="mainContent">
+    
     <section class="section section--quote" aria-label="Açılış alıntısı">
       <div class="wrap">
         <blockquote class="quote quote--hero">
@@ -52,12 +55,12 @@
     <section class="section section--grid" aria-label="Seçilmiş alıntılar">
       <div class="wrap grid">
         <blockquote class="quote">
-          <p>“Ben seni o gün değil, seni ilk gördüğüm gün değil... seni fark ettiğim gün sevdim. Belki daha önce görmüşümdür. Belki aynı koridorlarda yürüdük, aynı kapıdan geçtik. Ama kalbim seni ilk ne zaman tanıdıysa, işte o gün başladım sana içimden seslenmeye. Sana hiç dokunmadan, seni hiç durdurmadan... sadece uzaktan bir şarkı gibi sevdim seni.”</p>
+          <p>“Ben seni o gün değil, seni ilk gördüğüm gün değil... seni fark ettiğim gün sevdim. Belki daha önce görmüşümdür. Belki aynı koridorlarda yürüdük, aynı kapıdan geçtik. Ama kalbim seni ilk ne zaman tanıdıysa, işte o gün başladım sana içimden seslenmeye.”</p>
           <footer>— <span>Turuncu Saçlı Kız</span></footer>
         </blockquote>
 
         <blockquote class="quote">
-          <p>“Seninle aynı bankta oturmadık belki. Ama bir gün seni bahçede tek başına otururken görmüştüm. Yanında olmak istemedim. Çünkü yalnızlığın bir zarafeti vardı. Sadece izledim. Rüzgâr saçlarını geriye doğru savuruyordu... O gün karar verdim: bu defteri yazacağım. Sana değil. Ama senin yüzünden.”</p>
+          <p>“Seninle aynı bankta oturmadık belki. Ama bir gün seni bahçede tek başına otururken görmüştüm. Yanında olmak istemedim. Çünkü yalnızlığın bir zarafeti vardı. Sadece izledim.”</p>
           <footer>— <span>Turuncu Saçlı Kız</span></footer>
         </blockquote>
 
@@ -113,24 +116,21 @@
   </main>
 
   <script>
-    // GİRİŞ EKRANI GEÇİŞİ
     const startBtn = document.getElementById('startBtn');
     const introScreen = document.getElementById('introScreen');
     const mainContent = document.getElementById('mainContent');
 
     startBtn.addEventListener('click', () => {
-      // 1. Intro ekranını yavaşça kaybet (fadeOut animasyonu)
+      // 1. Intro ekranını yavaşça kaybet (CSS'teki fadeOut animasyonunu tetikle)
       introScreen.style.animation = 'fadeOut 0.8s ease-in-out forwards';
 
-      // 2. Animasyon bitince ana içeriği göster
+      // 2. Animasyon bittiğinde (0.8s sonra) ana içeriği göster
       setTimeout(() => {
-        introScreen.style.display = 'none'; // Ekrandan tamamen kaldır
+        introScreen.style.display = 'none';   // Girişi tamamen kaldır
         mainContent.classList.add('visible'); // İçeriği görünür yap
-        window.scrollTo(0, 0); // Sayfayı en üste al
-      }, 800); // Animasyon süresiyle (0.8s) senkronize
+        window.scrollTo(0, 0);                // Sayfayı en üste al
+      }, 800); 
     });
-
-    // (Gece modu kodu artık gereksiz, çünkü tema sabit karanlık ve intro var)
   </script>
 </body>
 </html>
