@@ -1,32 +1,28 @@
 :root{
-  --bg: #0f1113;
+  --bg: #0f1113;        /* Ana koyu zemin */
   --bg2:#14181b;
   --card:#161a1e;
-  --text:#e9e6df;
-  --muted:#bcb6aa;
+  --text:#e9e6df;       /* Kırık beyaz yazı */
+  --muted:#bcb6aa;      /* Sönük yazı */
   --line: rgba(255,255,255,.10);
 
-  --accent:#d4a373;
-  --accent2:#86a8a2;
-
-  --serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
-  --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --accent:#d4a373;     /* Sıcak vurgu rengi */
+  
+  --serif: "Crimson Pro", Georgia, serif;
+  --sans: "Inter", system-ui, sans-serif;
 
   --radius: 22px;
-  --shadow: 0 16px 50px rgba(0,0,0,.45);
 }
 
+/* Sayfa temel ayarları */
 html{
-  /* Intro olduğu için smooth scroll'u başlangıçta kapatıyoruz, geçişten sonra açılabilir ama şart değil */
-  /* scroll-behavior:smooth; */
-  background: var(--bg); /* Arka planı sabitledik */
+  background: var(--bg);
   color: var(--text);
-  height: 100%; /* Tam ekran intro için gerekli */
+  height: 100%;
 }
-
-/* html.night sınıfı artık gereksiz */
 
 *{ box-sizing:border-box; }
+
 body{
   margin:0;
   font-family: var(--sans);
@@ -37,6 +33,7 @@ body{
 a{ color: var(--text); text-decoration: none; }
 a:hover{ text-decoration: underline; }
 
+/* Film Greni (Eski fotoğraf dokusu) */
 .grain{
   position:fixed;
   inset:0;
@@ -44,7 +41,7 @@ a:hover{ text-decoration: underline; }
   opacity:.16;
   mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-  z-index: 9999; /* Her şeyin üzerinde */
+  z-index: 9999;
 }
 
 .wrap{
@@ -52,7 +49,7 @@ a:hover{ text-decoration: underline; }
   margin-inline:auto;
 }
 
-/* --- YENİ GİRİŞ EKRANI STİLLERİ --- */
+/* --- GİRİŞ EKRANI (INTRO) --- */
 .intro-screen {
   position: fixed;
   inset: 0;
@@ -66,11 +63,12 @@ a:hover{ text-decoration: underline; }
 
 .intro-bg {
   position: absolute;
-  inset: -20px; /* Kenar boşluklarını gizlemek için taşırıyoruz */
+  inset: -20px;
   background-size: cover;
   background-position: center;
+  /* Bulanıklık ve karartma efekti */
   filter: blur(18px) brightness(0.35);
-  transform: scale(1.1); /* Blur'un kenarları bozmasını önlemek için büyütüyoruz */
+  transform: scale(1.1);
   z-index: 1;
 }
 
@@ -80,8 +78,19 @@ a:hover{ text-decoration: underline; }
   text-align: center;
   padding: 20px;
   color: #fff;
-  /* İçerik yavaşça belirsin */
+  /* Yazılar yavaşça belirsin */
   animation: fadeIn 1.2s ease-out 0.3s both;
+}
+
+/* Yazar ismi (Kicker) - Eksik olan parçayı ekledik */
+.intro-content .kicker {
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-family: var(--sans);
 }
 
 .intro-title {
@@ -102,7 +111,7 @@ a:hover{ text-decoration: underline; }
   margin: 0 auto 40px;
 }
 
-/* Şık "Devam Et" butonu */
+/* "Devam Et" Butonu */
 .btn--enter {
   padding: 16px 38px;
   font-size: 14px;
@@ -118,7 +127,6 @@ a:hover{ text-decoration: underline; }
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .btn--enter:hover {
   background: rgba(255,255,255,0.15);
   border-color: rgba(255,255,255,0.5);
@@ -126,55 +134,49 @@ a:hover{ text-decoration: underline; }
 }
 
 /* --- ANİMASYONLAR --- */
-/* Belirme Animasyonu */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Kaybolma Animasyonu (Intro için) */
 @keyframes fadeOut {
   to { opacity: 0; visibility: hidden; }
 }
 
-/* --- ANA İÇERİK DÜZENLEMESİ --- */
+/* --- ANA İÇERİK (BAŞLANGIÇTA GİZLİ) --- */
 .main {
-  /* Başlangıçta gizli */
   display: none;
   opacity: 0;
-  padding-top: 100px; /* Intro'dan sonra üstten boşluk */
+  padding-top: 80px;
   min-height: 100vh;
 }
 
-/* JS ile eklenecek sınıf: İçeriği göster */
+/* JS ile tetiklenecek görünürlük sınıfı */
 .main.visible {
   display: block !important;
-  /* İçerik de yavaşça belirsin */
   animation: fadeIn 1s ease-out both;
 }
 
-/* ESKİ .hero STILLERİNİ KALDIRDIM */
-
-.section{
-  padding: 26px 0;
-}
-
-.section--quote{ padding-top: 22px; }
+/* --- BÖLÜMLER --- */
+.section{ padding: 40px 0; }
+.section--quote{ padding-top: 20px; }
 
 .note{
   border-radius: var(--radius);
   border: 1px solid var(--line);
   background: rgba(255,255,255,.02);
-  padding: 16px 18px;
+  padding: 20px 24px;
   color: rgba(233,230,223,.78);
   line-height:1.7;
-  text-align: center; /* Notu merkeze aldım, daha şık durur */
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 20px;
 }
 
 .quote{
@@ -182,132 +184,120 @@ a:hover{ text-decoration: underline; }
   border-radius: var(--radius);
   border: 1px solid var(--line);
   background: rgba(255,255,255,.02);
-  padding: 18px 18px 16px;
+  padding: 24px;
   box-shadow: 0 10px 40px rgba(0,0,0,.18);
+  transition: transform 0.2s ease;
 }
+.quote:hover{
+  background: rgba(255,255,255,.03);
+}
+
 .quote p{
   margin:0;
   font-family: var(--serif);
-  font-size: 18px;
-  line-height: 1.75;
-  letter-spacing: .1px;
+  font-size: 19px;
+  line-height: 1.6;
 }
 .quote footer{
-  margin-top: 12px;
+  margin-top: 14px;
   color: rgba(233,230,223,.62);
   font-size: 13px;
-  letter-spacing: .8px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   font-family: var(--sans);
 }
 
+/* Büyük Hero Alıntısı */
 .quote--hero{
-  padding: 32px; /* Biraz daha genişlettim */
+  padding: 40px;
   background:
     radial-gradient(700px 300px at 30% 15%, rgba(212,163,115,.12), transparent 60%),
     rgba(255,255,255,.02);
+  text-align: center;
 }
-.quote--hero p{ font-size: 24px; line-height: 1.6; } /* Ana alıntıyı büyüttüm */
+.quote--hero p{ font-size: 26px; line-height: 1.5; }
 
+/* PDF Okuma Alanı */
 .section--reader h2{
   margin:0;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 28px;
-  letter-spacing:.2px;
+  font-size: 32px;
 }
+.readerTop { text-align: center; } /* Ortalamayı ekledik */
+
 .readerSub{
-  margin: 8px 0 14px;
+  margin: 10px 0 20px;
   color: var(--muted);
   line-height: 1.65;
 }
 
 .readerActions{
   display:flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  justify-content: center; /* Butonları ortaladık */
+  margin-bottom: 24px;
 }
 
 .btn{
   border-radius: 999px;
-  padding: 10px 14px;
+  padding: 12px 20px;
   font-size: 14px;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,.02);
   color: var(--text);
   cursor:pointer;
-  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+  transition: all .2s ease;
+  display: inline-flex;
+  align-items: center;
 }
-.btn:hover{
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.04);
-  border-color: rgba(255,255,255,.16);
-}
+.btn:hover{ transform: translateY(-2px); text-decoration: none; }
+
 .btn--primary{
   border-color: rgba(212,163,115,.35);
   background: linear-gradient(180deg, rgba(212,163,115,.18), rgba(212,163,115,.08));
 }
-.btn--primary:hover{
-  border-color: rgba(212,163,115,.55);
-}
-.btn--ghost { /* İndir butonu için */
-  background: transparent;
-  border-color: var(--line);
-}
-.btn--ghost:hover {
-    background: rgba(255,255,255,0.05);
-    border-color: rgba(255,255,255,0.2);
-}
+.btn--primary:hover{ border-color: rgba(212,163,115,.55); }
 
+.btn--ghost { background: transparent; }
+.btn--ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
 
 .quote--closing{
-  margin-top: 16px;
+  margin-top: 30px;
+  text-align: center;
   background:
     radial-gradient(520px 260px at 70% 45%, rgba(134,168,162,.12), transparent 60%),
     rgba(255,255,255,.02);
 }
 
-.section--footer{
-  padding-top: 20px;
-}
+/* Footer */
+.section--footer{ padding-top: 40px; }
 .footer{
   display:flex;
   justify-content: space-between;
   gap: 14px;
   align-items: center;
   border-top:1px solid var(--line);
-  padding-top: 18px;
+  padding-top: 24px;
+  padding-bottom: 40px;
 }
-.sig__name{
-  margin:0;
-  font-family: var(--serif);
-  font-size: 18px;
-}
-.sig__meta{
-  margin:4px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-}
+.sig__name{ margin:0; font-family: var(--serif); font-size: 18px; }
+.sig__meta{ margin:4px 0 0; color: var(--muted); font-size: 13px; }
+
 .links a{
   color: rgba(233,230,223,.75);
   font-size: 13px;
   border:1px solid var(--line);
-  padding: 8px 10px;
+  padding: 8px 14px;
   border-radius: 999px;
   background: rgba(255,255,255,.02);
 }
-.links a:hover{
-  text-decoration:none;
-  border-color: rgba(255,255,255,.16);
-}
+.links a:hover{ text-decoration:none; border-color: rgba(255,255,255,.25); }
 
-/* Mobil */
+/* Mobil Ayarlar */
 @media (max-width: 900px){
-  .grid{
-    grid-template-columns: 1fr;
-  }
+  .grid{ grid-template-columns: 1fr; }
   .quote p{ font-size: 17px; }
-  .quote--hero p{ font-size: 20px; }
-  .intro-title { font-size: 3.5rem; } /* Mobilde başlık boyutu */
+  .quote--hero p{ font-size: 21px; }
+  .intro-title { font-size: 3.5rem; }
 }
