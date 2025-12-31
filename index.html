@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
   <meta name="description" content="Turuncu Saçlı Kız — Berkay Alay. Sessizliğin içinden geçen bir hatıranın sayfası." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- İstersen fontu değiştirebiliriz; şimdilik sade ve güvenli -->
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -15,9 +15,9 @@
 <body>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- HERO -->
   <header class="hero">
     <div class="hero__inner">
-      <!-- Kapak görseli: repo'ya cover.jpg koyarsan otomatik görünür -->
       <figure class="cover" id="coverWrap">
         <img id="coverImg" src="./cover.jpg" alt="Turuncu Saçlı Kız kapak görseli" loading="eager" />
         <figcaption class="cover__caption">Turuncu Saçlı Kız</figcaption>
@@ -27,11 +27,12 @@
         <p class="kicker">Berkay Alay</p>
         <h1>Turuncu Saçlı Kız</h1>
         <p class="sub">
-          Bu metin aceleyle okunmaz. Bazı şeyler, ancak satır aralarında durunca anlaşılır.
+          Bu metin aceleyle okunmaz.  
+          Bazı şeyler, ancak satır aralarında durunca anlaşılır.
         </p>
 
         <div class="cta">
-          <a class="btn btn--primary" href="#oku">Okumaya Başla</a>
+          <a class="btn btn--primary" href="#vitrin">Sayfayı Gezin</a>
           <button class="btn btn--ghost" type="button" id="toggleTheme">Gece Modu</button>
         </div>
 
@@ -43,77 +44,88 @@
   </header>
 
   <main class="main">
-    <section class="section section--quote" aria-label="Açılış alıntısı">
+
+    <!-- AÇILIŞ ALINTISI -->
+    <section class="section section--quote">
       <div class="wrap">
         <blockquote class="quote quote--hero">
-          <p>“Ben seni bir bakışta tanıdım. Ama sen beni hiçbir zaman fark etmedin. Ve fark etmemenin içinde öylesine bir adalet vardı ki... buna bile razı oldum. Sadece seni uzaktan görebilmek, bana uzun bir kış boyu yetecek kadar sıcaklık verdi.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Ben seni bir bakışta tanıdım. Ama sen beni hiçbir zaman fark etmedin.
+            Ve fark etmemenin içinde öylesine bir adalet vardı ki... buna bile razı oldum.
+            Sadece seni uzaktan görebilmek, bana uzun bir kış boyu yetecek kadar sıcaklık verdi.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
       </div>
     </section>
 
-    <section class="section" aria-label="Kısa not">
+    <!-- DURAK -->
+    <section class="section">
       <div class="wrap">
         <div class="note">
           <p>
-            Bu sayfa bir “tanıtım” değil; bir “durak”.
+            Bu sayfa bir tanıtım değil; bir durak.  
             Burada birine yaklaşmak değil, bir anı yerinde tutmak var.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="section section--grid" aria-label="Seçilmiş alıntılar">
+    <!-- VİTRİN -->
+    <section class="section section--grid" id="vitrin">
       <div class="wrap grid">
-        <blockquote class="quote">
-          <p>“Ben seni o gün değil, seni ilk gördüğüm gün değil... seni fark ettiğim gün sevdim. Belki daha önce görmüşümdür. Belki aynı koridorlarda yürüdük, aynı kapıdan geçtik. Ama kalbim seni ilk ne zaman tanıdıysa, işte o gün başladım sana içimden seslenmeye. Sana hiç dokunmadan, seni hiç durdurmadan... sadece uzaktan bir şarkı gibi sevdim seni.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
-        </blockquote>
 
         <blockquote class="quote">
-          <p>“Seninle aynı bankta oturmadık belki. Ama bir gün seni bahçede tek başına otururken görmüştüm. Yanında olmak istemedim. Çünkü yalnızlığın bir zarafeti vardı. Sadece izledim. Rüzgâr saçlarını geriye doğru savuruyordu... O gün karar verdim: bu defteri yazacağım. Sana değil. Ama senin yüzünden.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
-        </blockquote>
-
-        <blockquote class="quote">
-          <p>“Seninle konuşmadık. Ama bir sessizlik paylaştık. Ve o sessizlik, şimdiye kadar başkalarıyla paylaştığım tüm cümlelerden daha gerçekti. Sana hiçbir zaman söylemeyeceğim cümlelerim var; onları yazdım.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
-        </blockquote>
-
-        <blockquote class="quote">
-          <p>“Belki bir gün sorarsın kendine: ‘Beni hiç gerçekten tanıyan oldu mu?’ O zaman bil ki, evet, seni hiç tanımadan tanıyan biri vardı... Seninle konuşamadığım her an, sana en çok yaklaştığım andı belki de.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
-        </blockquote>
-      </div>
-    </section>
-
-    <section class="section section--reader" id="oku" aria-label="Okuyucu">
-      <div class="wrap">
-        <div class="readerTop">
-          <h2>Okuma</h2>
-          <p class="readerSub">
-            Aşağıdan PDF açılır. Telefonda daha rahat olsun diye tam ekran seçeneği de var.
+          <p>
+            “Ben seni o gün değil, seni ilk gördüğüm gün değil...
+            seni fark ettiğim gün sevdim.”
           </p>
+          <footer>— Turuncu Saçlı Kız</footer>
+        </blockquote>
 
-          <div class="readerActions">
-            <a class="btn btn--primary" href="./turuncu-sacli-kiz.pdf" target="_blank" rel="noopener">
-              PDF’yi Yeni Sekmede Aç
-            </a>
-            <a class="btn btn--ghost" href="./turuncu-sacli-kiz.pdf" download>
-              PDF’yi İndir
-            </a>
-          </div>
-        </div>
+        <blockquote class="quote">
+          <p>
+            “Yanında olmak istemedim.
+            Çünkü yalnızlığın bir zarafeti vardı.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
+        </blockquote>
 
+        <blockquote class="quote">
+          <p>
+            “Seninle konuşmadık.
+            Ama bir sessizlik paylaştık.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
+        </blockquote>
 
+        <blockquote class="quote">
+          <p>
+            “Sana hiç dokunmadan,
+            seni hiç durdurmadan...
+            sadece uzaktan bir şarkı gibi sevdim seni.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <!-- ÇIKIŞ DUVARI -->
+    <section class="section">
+      <div class="wrap">
         <blockquote class="quote quote--closing">
-          <p>“Eğer bir gün bu kitabı okurken kalbinin bir yeri sızlarsa, bil ki ben de aynı sayfada durmuş, seni bekliyordum.”</p>
-          <footer>— <span>Turuncu Saçlı Kız</span></footer>
+          <p>
+            “Eğer bir gün bu kitabı okurken kalbinin bir yeri sızlarsa,
+            bil ki ben de aynı sayfada durmuş, seni bekliyordum.”
+          </p>
+          <footer>— Turuncu Saçlı Kız</footer>
         </blockquote>
       </div>
     </section>
 
-    <section class="section section--footer" aria-label="Alt bilgi">
+    <!-- FOOTER -->
+    <section class="section section--footer">
       <div class="wrap footer">
         <div class="sig">
           <p class="sig__name">Berkay Alay</p>
@@ -121,15 +133,17 @@
         </div>
 
         <div class="links">
-          <!-- İstersen buraya books2read linkini ekleyebilirsin -->
-          <a href="https://books2read.com/berkayalay" target="_blank" rel="noopener">Yazar sayfası</a>
+          <a href="https://books2read.com/berkayalay" target="_blank" rel="noopener">
+            Yazar sayfası
+          </a>
         </div>
       </div>
     </section>
+
   </main>
 
   <script>
-    // Kapak görseli yoksa estetik fallback
+    // Kapak fallback
     const img = document.getElementById('coverImg');
     img.addEventListener('error', () => {
       const wrap = document.getElementById('coverWrap');
@@ -137,7 +151,7 @@
       img.remove();
     });
 
-    // Tema: localStorage ile hatırlasın
+    // Gece modu
     const toggle = document.getElementById('toggleTheme');
     const key = 'ba_theme';
     const saved = localStorage.getItem(key);
@@ -145,7 +159,10 @@
 
     toggle.addEventListener('click', () => {
       document.documentElement.classList.toggle('night');
-      localStorage.setItem(key, document.documentElement.classList.contains('night') ? 'night' : 'day');
+      localStorage.setItem(
+        key,
+        document.documentElement.classList.contains('night') ? 'night' : 'day'
+      );
     });
   </script>
 </body>
