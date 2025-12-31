@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
   <meta name="description" content="Turuncu Saçlı Kız — Berkay Alay. Sessizliğin içinden geçen bir hatıranın sayfası." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- İstersen fontu değiştirebiliriz; şimdilik sade ve güvenli -->
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
 </head>
@@ -15,9 +15,37 @@
 <body>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- =========================
+       A SEÇENEĞİ: KAPAK GİRİŞ PERDESİ
+       - cover.jpg arka plan (blur)
+       - "Devam et" ile çözülerek kaybolur
+  ========================== -->
+  <div id="introScreen" aria-hidden="false">
+    <div class="introBg" id="introBg" aria-hidden="true"></div>
+
+    <div class="introInner" role="dialog" aria-label="Giriş">
+      <p class="introKicker">Berkay Alay</p>
+      <h1 class="introTitle">Turuncu Saçlı Kız</h1>
+
+      <p class="introText">
+        Seninle yaşadığım şey böyleydi:<br>
+        <span>zamansız, mekânsız, ama gerçek.</span>
+      </p>
+
+      <button id="introBtn" class="btn btn--primary" type="button" aria-label="Devam et">
+        Devam Et
+      </button>
+
+      <p class="introHint">Devam etmek için dokun.</p>
+    </div>
+  </div>
+
+
+  <!-- HERO -->
   <header class="hero">
     <div class="hero__inner">
-      <!-- Kapak görseli: repo'ya cover.jpg koyarsan otomatik görünür -->
+
+      <!-- Kapak görseli: cover.jpg -->
       <figure class="cover" id="coverWrap">
         <img id="coverImg" src="./cover.jpg" alt="Turuncu Saçlı Kız kapak görseli" loading="eager" />
         <figcaption class="cover__caption">Turuncu Saçlı Kız</figcaption>
@@ -42,7 +70,9 @@
     </div>
   </header>
 
+
   <main class="main">
+
     <section class="section section--quote" aria-label="Açılış alıntısı">
       <div class="wrap">
         <blockquote class="quote quote--hero">
@@ -87,24 +117,22 @@
       </div>
     </section>
 
-    <section class="section section--reader" id="oku" aria-label="Okuyucu">
+    <!-- OKUMA (PDF YOK / YAZILMAKTADIR) -->
+    <section class="section section--reader" id="oku" aria-label="Okuma">
       <div class="wrap">
         <div class="readerTop">
           <h2>Okuma</h2>
           <p class="readerSub">
-            Aşağıdan PDF açılır. Telefonda daha rahat olsun diye tam ekran seçeneği de var.
+            PDF eklenmemiştir. Turuncu Saçlı Kız şu an yazılmaktadır.
           </p>
 
-          <div class="readerActions">
-            <a class="btn btn--primary" href="./turuncu-sacli-kiz.pdf" target="_blank" rel="noopener">
-              PDF’yi Yeni Sekmede Aç
-            </a>
-            <a class="btn btn--ghost" href="./turuncu-sacli-kiz.pdf" download>
-              PDF’yi İndir
-            </a>
+          <div class="note">
+            <p>
+              Bu sayfa dijital yayın değildir; bir sergi odası gibi kalsın istedim.
+              Okur burada “tam metni” değil, metnin bıraktığı izi görür.
+            </p>
           </div>
         </div>
-
 
         <blockquote class="quote quote--closing">
           <p>“Eğer bir gün bu kitabı okurken kalbinin bir yeri sızlarsa, bil ki ben de aynı sayfada durmuş, seni bekliyordum.”</p>
@@ -121,15 +149,15 @@
         </div>
 
         <div class="links">
-          <!-- İstersen buraya books2read linkini ekleyebilirsin -->
           <a href="https://books2read.com/berkayalay" target="_blank" rel="noopener">Yazar sayfası</a>
         </div>
       </div>
     </section>
   </main>
 
+
   <script>
-    // Kapak görseli yoksa estetik fallback
+    // Kapak görseli yoksa estetik fallback (hero cover)
     const img = document.getElementById('coverImg');
     img.addEventListener('error', () => {
       const wrap = document.getElementById('coverWrap');
@@ -146,6 +174,38 @@
     toggle.addEventListener('click', () => {
       document.documentElement.classList.toggle('night');
       localStorage.setItem(key, document.documentElement.classList.contains('night') ? 'night' : 'day');
+    });
+
+    // =========================
+    // GİRİŞ PERDESİ (A)
+    // cover.jpg arka plan olarak bas
+    // =========================
+    const intro = document.getElementById('introScreen');
+    const introBg = document.getElementById('introBg');
+    const introBtn = document.getElementById('introBtn');
+
+    // sayfa açılınca kilitle
+    document.body.style.overflow = 'hidden';
+
+    // intro bg: cover.jpg varsa kullan
+    const coverUrl = './cover.jpg';
+    const testImg = new Image();
+    testImg.onload = () => {
+      introBg.style.backgroundImage = `url('${coverUrl}')`;
+      intro.classList.add('hasCover');
+    };
+    testImg.onerror = () => {
+      // kapak yoksa da sorun değil: CSS fallback zemin kalır
+      intro.classList.add('noCover');
+    };
+    testImg.src = coverUrl;
+
+    introBtn.addEventListener('click', () => {
+      intro.classList.add('hide');
+      setTimeout(() => {
+        intro.remove();
+        document.body.style.overflow = '';
+      }, 900);
     });
   </script>
 </body>
