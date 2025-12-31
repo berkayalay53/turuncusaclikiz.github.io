@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
-  <meta name="description" content="Turuncu Saçlı Kız — Berkay Alay. Bu bir site değil, bir hatıranın mekânı." />
+  <meta name="description" content="Turuncu Saçlı Kız — Berkay Alay." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,19 +26,15 @@
     <div class="overlay__content">
       <p class="overlay__author">Berkay Alay</p>
       <h1 class="overlay__title">Turuncu Saçlı Kız</h1>
-      <p class="overlay__line">
-        Bazı metinler okunmaz.  
-        Yerinde durur.
-      </p>
       <button class="overlay__enter" id="enterBtn">Devam Et</button>
     </div>
   </div>
 
-  <!-- ANA MEKÂN -->
+  <!-- HERO (KAPAK SON KEZ BURADA) -->
   <header class="hero">
     <div class="hero__inner">
       <figure class="cover" id="coverWrap">
-        <img id="coverImg" src="./cover.jpg" alt="Turuncu Saçlı Kız kapak görseli" loading="eager" />
+        <img id="coverImg" src="./cover.jpg" alt="Turuncu Saçlı Kız kapak görseli" />
         <figcaption class="cover__caption">Turuncu Saçlı Kız</figcaption>
       </figure>
 
@@ -48,7 +44,6 @@
         <p class="sub">
           Bu metin aceleyle okunmaz. Bazı şeyler, ancak satır aralarında durunca anlaşılır.
         </p>
-
         <p class="hint">
           Sessiz bir sayfa: uzun cümlelerden çok, boşluklar çalışır.
         </p>
@@ -56,9 +51,10 @@
     </div>
   </header>
 
+  <!-- ALINTILAR -->
   <main class="main">
 
-    <section class="section section--quote" aria-label="Açılış alıntısı">
+    <section class="section section--quote">
       <div class="wrap">
         <blockquote class="quote quote--hero">
           <p>“Ben seni bir bakışta tanıdım. Ama sen beni hiçbir zaman fark etmedin. Ve fark etmemenin içinde öylesine bir adalet vardı ki... buna bile razı oldum. Sadece seni uzaktan görebilmek, bana uzun bir kış boyu yetecek kadar sıcaklık verdi.”</p>
@@ -67,7 +63,7 @@
       </div>
     </section>
 
-    <section class="section" aria-label="Kısa not">
+    <section class="section">
       <div class="wrap">
         <div class="note">
           <p>
@@ -78,7 +74,7 @@
       </div>
     </section>
 
-    <section class="section section--grid" aria-label="Seçilmiş alıntılar">
+    <section class="section section--grid">
       <div class="wrap grid">
 
         <blockquote class="quote">
@@ -104,7 +100,7 @@
       </div>
     </section>
 
-    <section class="section section--quote" aria-label="Kapanış alıntısı">
+    <section class="section section--quote">
       <div class="wrap">
         <blockquote class="quote quote--closing">
           <p>“Eğer bir gün bu kitabı okurken kalbinin bir yeri sızlarsa, bil ki ben de aynı sayfada durmuş, seni bekliyordum.”</p>
@@ -117,21 +113,11 @@
 
   <script>
     const overlay = document.getElementById('overlay');
-    const enterBtn = document.getElementById('enterBtn');
-
-    enterBtn.addEventListener('click', () => {
+    document.getElementById('enterBtn').addEventListener('click', () => {
       overlay.classList.add('overlay--hide');
       setTimeout(() => overlay.remove(), 900);
-    });
-
-    const img = document.getElementById('coverImg');
-    img.addEventListener('error', () => {
-      const wrap = document.getElementById('coverWrap');
-      wrap.classList.add('cover--fallback');
-      img.remove();
     });
   </script>
 
 </body>
 </html>
-
