@@ -301,3 +301,32 @@ a:hover{ text-decoration: underline; }
   .quote--hero p{ font-size: 21px; }
   .intro-title { font-size: 3.5rem; }
 }
+/* ========================================= */
+/* === SİTE GENELİ ATMOSFER GÜNCELLEMESİ === */
+/* ========================================= */
+
+/* 1. ZARİF KAYDIRMA ÇUBUĞU (SCROLLBAR) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent); /* Pas rengi */
+  border-radius: 5px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212,163,115, .8);
+}
+
+/* 2. ÖZEL SEÇİM RENGİ (Maviyi Yok Etme) */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+::-moz-selection {
+  background: var(--accent);
+  color: var(--bg);
+}
