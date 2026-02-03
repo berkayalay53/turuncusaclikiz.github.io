@@ -6,7 +6,7 @@
   --muted:#bcb6aa;      /* Sönük yazı */
   --line: rgba(255,255,255,.10);
 
-  --accent:#d4a373;     /* Sıcak vurgu rengi */
+  --accent:#d4a373;     /* Senin Rengin (Pas/Toprak) */
   
   --serif: "Crimson Pro", Georgia, serif;
   --sans: "Inter", system-ui, sans-serif;
@@ -78,11 +78,9 @@ a:hover{ text-decoration: underline; }
   text-align: center;
   padding: 20px;
   color: #fff;
-  /* Yazılar yavaşça belirsin */
   animation: fadeIn 1.2s ease-out 0.3s both;
 }
 
-/* Yazar ismi (Kicker) - Eksik olan parçayı ekledik */
 .intro-content .kicker {
   margin: 0 0 10px;
   color: rgba(255, 255, 255, 0.6);
@@ -143,7 +141,7 @@ a:hover{ text-decoration: underline; }
   to { opacity: 0; visibility: hidden; }
 }
 
-/* --- ANA İÇERİK (BAŞLANGIÇTA GİZLİ) --- */
+/* --- ANA İÇERİK --- */
 .main {
   display: none;
   opacity: 0;
@@ -151,7 +149,6 @@ a:hover{ text-decoration: underline; }
   min-height: 100vh;
 }
 
-/* JS ile tetiklenecek görünürlük sınıfı */
 .main.visible {
   display: block !important;
   animation: fadeIn 1s ease-out both;
@@ -224,7 +221,7 @@ a:hover{ text-decoration: underline; }
   font-weight: 600;
   font-size: 32px;
 }
-.readerTop { text-align: center; } /* Ortalamayı ekledik */
+.readerTop { text-align: center; }
 
 .readerSub{
   margin: 10px 0 20px;
@@ -236,7 +233,7 @@ a:hover{ text-decoration: underline; }
   display:flex;
   gap: 12px;
   flex-wrap: wrap;
-  justify-content: center; /* Butonları ortaladık */
+  justify-content: center;
   margin-bottom: 24px;
 }
 
@@ -294,18 +291,18 @@ a:hover{ text-decoration: underline; }
 }
 .links a:hover{ text-decoration:none; border-color: rgba(255,255,255,.25); }
 
-/* Mobil Ayarlar */
 @media (max-width: 900px){
   .grid{ grid-template-columns: 1fr; }
   .quote p{ font-size: 17px; }
   .quote--hero p{ font-size: 21px; }
   .intro-title { font-size: 3.5rem; }
 }
+
 /* ========================================= */
 /* === SİTE GENELİ ATMOSFER GÜNCELLEMESİ === */
 /* ========================================= */
 
-/* 1. ZARİF KAYDIRMA ÇUBUĞU (SCROLLBAR) */
+/* 1. PAS RENGİ KAYDIRMA ÇUBUĞU */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -321,7 +318,7 @@ a:hover{ text-decoration: underline; }
   background: rgba(212,163,115, .8);
 }
 
-/* 2. ÖZEL SEÇİM RENGİ (Maviyi Yok Etme) */
+/* 2. PAS RENGİ METİN SEÇİMİ */
 ::selection {
   background: var(--accent);
   color: var(--bg);
@@ -329,19 +326,4 @@ a:hover{ text-decoration: underline; }
 ::-moz-selection {
   background: var(--accent);
   color: var(--bg);
-
-}
-/* === KARANLIKTA FENER EFEKTİ === */
-.spotlight {
-  position: fixed;
-  inset: 0;
-  pointer-events: none; /* Tıklamaları engellemez */
-  z-index: 9990; /* Grain'in altında ama içeriğin üstünde */
-  background: radial-gradient(
-    circle 250px at var(--x, 50%) var(--y, 50%),
-    rgba(212, 163, 115, 0.08), /* Pas rengi, çok loş */
-    transparent 60%
-  );
-  mix-blend-mode: screen;
-  transition: background 0.1s ease;
 }
