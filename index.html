@@ -26,8 +26,6 @@
 
 <body>
   <div class="grain" aria-hidden="true"></div>
-  
-  <div class="spotlight"></div>
 
   <header class="intro-screen" id="introScreen">
     <div class="intro-bg" style="background-image: url('./cover.jpg');"></div>
@@ -134,19 +132,15 @@
     const mainContent = document.getElementById('mainContent');
 
     startBtn.addEventListener('click', () => {
+      // 1. Perdeyi kaldır
       introScreen.style.animation = 'fadeOut 0.8s ease-in-out forwards';
+
+      // 2. İçeriği göster
       setTimeout(() => {
         introScreen.style.display = 'none';
         mainContent.classList.add('visible');
         window.scrollTo(0, 0);
       }, 800); 
-    });
-
-    // FENER EFEKTİ KODU
-    const spotlight = document.querySelector('.spotlight');
-    document.addEventListener('mousemove', (e) => {
-      spotlight.style.setProperty('--x', e.clientX + 'px');
-      spotlight.style.setProperty('--y', e.clientY + 'px');
     });
   </script>
 </body>
