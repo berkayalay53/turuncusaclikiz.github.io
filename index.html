@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
   <meta name="description" content="Turuncu Saçlı Kız — Berkay Alay. Sessizliğin içinden geçen bir hatıranın sayfası." />
+
+  <meta property="og:title" content="Turuncu Saçlı Kız — Berkay Alay">
+  <meta property="og:description" content="Sessizliğin içinden geçen bir hatıranın sayfası.">
+  <meta property="og:image" content="https://berkayalay53.github.io/turuncusaclikiz.github.io/cover.jpg">
+  <meta property="og:url" content="https://berkayalay53.github.io/turuncusaclikiz.github.io/">
+  <meta property="og:type" content="book">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Turuncu Saçlı Kız — Berkay Alay">
+  <meta name="twitter:description" content="Sessizliğin içinden geçen bir hatıranın sayfası.">
+  <meta name="twitter:image" content="https://berkayalay53.github.io/turuncusaclikiz.github.io/cover.jpg">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,25 +134,20 @@
     const mainContent = document.getElementById('mainContent');
 
     startBtn.addEventListener('click', () => {
-      // 1. Intro ekranını yavaşça kaybet (CSS'teki fadeOut animasyonunu tetikle)
       introScreen.style.animation = 'fadeOut 0.8s ease-in-out forwards';
-
-      // 2. Animasyon bittiğinde (0.8s sonra) ana içeriği göster
       setTimeout(() => {
-        introScreen.style.display = 'none';   // Girişi tamamen kaldır
-        mainContent.classList.add('visible'); // İçeriği görünür yap
-        window.scrollTo(0, 0);                // Sayfayı en üste al
+        introScreen.style.display = 'none';
+        mainContent.classList.add('visible');
+        window.scrollTo(0, 0);
       }, 800); 
     });
 
-    // FENER EFEKTİ KODU (Bunu Ekledik)
+    // FENER EFEKTİ KODU
     const spotlight = document.querySelector('.spotlight');
     document.addEventListener('mousemove', (e) => {
       spotlight.style.setProperty('--x', e.clientX + 'px');
       spotlight.style.setProperty('--y', e.clientY + 'px');
     });
   </script>
-</body>
-</html>
 </body>
 </html>
