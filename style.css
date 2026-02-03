@@ -329,4 +329,19 @@ a:hover{ text-decoration: underline; }
 ::-moz-selection {
   background: var(--accent);
   color: var(--bg);
+
+}
+/* === KARANLIKTA FENER EFEKTİ === */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none; /* Tıklamaları engellemez */
+  z-index: 9990; /* Grain'in altında ama içeriğin üstünde */
+  background: radial-gradient(
+    circle 250px at var(--x, 50%) var(--y, 50%),
+    rgba(212, 163, 115, 0.08), /* Pas rengi, çok loş */
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+  transition: background 0.1s ease;
 }
