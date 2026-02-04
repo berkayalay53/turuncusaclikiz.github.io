@@ -1,344 +1,287 @@
-:root{
-  --bg: #0f1113;        /* Ana koyu zemin */
-  --bg2:#14181b;
-  --card:#161a1e;
-  --text:#e9e6df;       /* Kırık beyaz yazı */
-  --muted:#bcb6aa;      /* Sönük yazı */
-  --line: rgba(255,255,255,.10);
-
-  --accent:#d4a373;     /* Senin Rengin (Pas/Toprak) */
-  
+/* === GENEL AYARLAR === */
+:root {
+  --bg: #0f1113;
+  --text: #e9e6df;
+  --muted: #bcb6aa;
+  --accent: #d4a373; /* Pas Rengi */
   --serif: "Crimson Pro", Georgia, serif;
   --sans: "Inter", system-ui, sans-serif;
-
-  --radius: 22px;
 }
 
-/* Sayfa temel ayarları */
-html{
-  background: var(--bg);
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg);
   color: var(--text);
-  height: 100%;
-}
-
-*{ box-sizing:border-box; }
-
-body{
-  margin:0;
   font-family: var(--sans);
-  letter-spacing: .2px;
-  height: 100%;
+  line-height: 1.8;
+  overflow-x: hidden; /* Yatay taşmayı engelle */
 }
 
-a{ color: var(--text); text-decoration: none; }
-a:hover{ text-decoration: underline; }
-
-/* Film Greni (Eski fotoğraf dokusu) */
-.grain{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.16;
-  mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-  z-index: 9999;
+/* 1. PAS RENGİ KAYDIRMA ÇUBUĞU */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+  border: 1px solid var(--bg);
 }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-.wrap{
-  width:min(1000px, calc(100% - 36px));
-  margin-inline:auto;
-}
+/* Metin Seçimi */
+::selection { background: var(--accent); color: var(--bg); }
 
-/* --- GİRİŞ EKRANI (INTRO) --- */
-.intro-screen {
+
+/* =============================================
+   1. GİRİŞ EKRANI (ÇİFT KATMANLI - NET YAZI)
+   =============================================
+*/
+#intro-screen {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  text-align: center;
   background: var(--bg);
+  transition: opacity 1.5s ease-in-out, visibility 1.5s;
 }
 
+/* KATMAN 1: Arka Plan Resmi (Flu) */
 .intro-bg {
   position: absolute;
-  inset: -20px;
+  inset: 0;
+  background-image: url('./cover.jpg'); /* Kitap kapağı */
   background-size: cover;
   background-position: center;
-  /* Bulanıklık ve karartma efekti */
-  filter: blur(18px) brightness(0.35);
+  filter: blur(8px) brightness(0.4); 
   transform: scale(1.1);
-  z-index: 1;
+  z-index: -1;
 }
 
+/* KATMAN 2: İçerik (Net) */
 .intro-content {
   position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 20px;
-  color: #fff;
-  animation: fadeIn 1.2s ease-out 0.3s both;
+  z-index: 10001;
+  padding: 2rem;
+  max-width: 700px;
+  animation: introFadeIn 1.5s ease;
 }
 
-.intro-content .kicker {
-  margin: 0 0 10px;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 400;
+.kicker {
+  font-family: var(--sans);
   letter-spacing: 3px;
   text-transform: uppercase;
-  font-size: 13px;
-  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 10px;
 }
 
 .intro-title {
   font-family: var(--serif);
-  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: #fff;
   font-weight: 300;
-  margin: 10px 0 20px;
   line-height: 1;
-  text-shadow: 0 5px 30px rgba(0,0,0,0.6);
+  margin-bottom: 20px;
+  text-shadow: 0 5px 30px rgba(0,0,0,0.5);
 }
 
 .intro-sub {
   font-family: var(--serif);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.9);
   font-style: italic;
-  color: rgba(255,255,255,0.85);
-  max-width: 42ch;
-  margin: 0 auto 40px;
+  margin-bottom: 40px;
 }
 
-/* "Devam Et" Butonu */
-.btn--enter {
-  padding: 16px 38px;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-family: var(--sans);
-  font-weight: 500;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.25);
-  backdrop-filter: blur(8px);
-  border-radius: 50px;
+/* Buton */
+#start-btn {
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 14px 40px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  transition: all 0.4s ease;
 }
-.btn--enter:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.5);
+
+#start-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
   transform: translateY(-2px);
 }
 
-/* --- ANİMASYONLAR --- */
-@keyframes fadeIn {
+/* Perde Kapanınca */
+#intro-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes introFadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
+
+/* =============================================
+   2. ANA SAYFA VE SAHNELER
+   =============================================
+*/
+
+/* Sayfa Arka Planı (Sabit Flu Kapak) */
+.fixed-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('./cover.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px) brightness(0.2); 
+  z-index: -1;
+  transform: scale(1.1);
 }
 
-/* --- ANA İÇERİK --- */
-.main {
-  display: none;
+/* Gren Efekti */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  z-index: 999;
+}
+
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 0 1.5rem 10rem;
+  opacity: 0; /* Başlangıçta gizli */
+  transition: opacity 1.5s ease;
+}
+
+.page.visible { opacity: 1; }
+
+.hero-spacer { height: 15vh; }
+
+/* ALINTI KUTULARI (SCENE FLOW) */
+.quote {
+  max-width: 520px;
+  margin: 8rem 0; /* Geniş boşluk */
+  background: rgba(255,255,255,0.03); /* Çok hafif cam efekti */
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  
+  /* Animasyon Başlangıcı */
   opacity: 0;
-  padding-top: 80px;
-  min-height: 100vh;
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.main.visible {
-  display: block !important;
-  animation: fadeIn 1s ease-out both;
+.quote.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* --- BÖLÜMLER --- */
-.section{ padding: 40px 0; }
-.section--quote{ padding-top: 20px; }
-
-.note{
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.02);
-  padding: 20px 24px;
-  color: rgba(233,230,223,.78);
-  line-height:1.7;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.quote{
-  margin:0;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.02);
-  padding: 24px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.18);
-  transition: transform 0.2s ease;
-}
-.quote:hover{
-  background: rgba(255,255,255,.03);
-}
-
-.quote p{
-  margin:0;
+.quote p {
   font-family: var(--serif);
-  font-size: 19px;
+  font-size: 1.4rem;
   line-height: 1.6;
+  color: #f0f0f0;
 }
-.quote footer{
-  margin-top: 14px;
-  color: rgba(233,230,223,.62);
-  font-size: 13px;
+
+.quote span {
+  display: block;
+  margin-top: 15px;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-family: var(--sans);
+  color: var(--accent);
+  opacity: 0.8;
 }
 
-/* Büyük Hero Alıntısı */
-.quote--hero{
-  padding: 40px;
-  background:
-    radial-gradient(700px 300px at 30% 15%, rgba(212,163,115,.12), transparent 60%),
-    rgba(255,255,255,.02);
+/* Konumlandırma Sınıfları */
+.q-left { margin-right: auto; text-align: left; border-left: 2px solid var(--accent); }
+.q-right { margin-left: auto; text-align: right; border-right: 2px solid var(--accent); }
+.q-center { 
+  margin: 6rem auto; 
+  text-align: center; 
+  max-width: 700px;
+  border-top: 1px solid var(--accent);
+  background: transparent;
+  border-left: none; border-right: none;
+}
+.q-center p { font-size: 1.6rem; font-style: italic; }
+
+/* Ayıraç */
+.divider {
   text-align: center;
-}
-.quote--hero p{ font-size: 26px; line-height: 1.5; }
-
-/* PDF Okuma Alanı */
-.section--reader h2{
-  margin:0;
+  margin: 6rem 0;
+  color: var(--accent);
+  opacity: 0.4;
+  font-size: 2rem;
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: 32px;
-}
-.readerTop { text-align: center; }
-
-.readerSub{
-  margin: 10px 0 20px;
-  color: var(--muted);
-  line-height: 1.65;
 }
 
-.readerActions{
-  display:flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 24px;
-}
-
-.btn{
-  border-radius: 999px;
-  padding: 12px 20px;
-  font-size: 14px;
-  border: 1px solid var(--line);
-  color: var(--text);
-  cursor:pointer;
-  transition: all .2s ease;
-  display: inline-flex;
-  align-items: center;
-}
-.btn:hover{ transform: translateY(-2px); text-decoration: none; }
-
-.btn--primary{
-  border-color: rgba(212,163,115,.35);
-  background: linear-gradient(180deg, rgba(212,163,115,.18), rgba(212,163,115,.08));
-}
-.btn--primary:hover{ border-color: rgba(212,163,115,.55); }
-
-.btn--ghost { background: transparent; }
-.btn--ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
-
-.quote--closing{
-  margin-top: 30px;
+/* PDF İndirme Alanı */
+.reader-section {
   text-align: center;
-  background:
-    radial-gradient(520px 260px at 70% 45%, rgba(134,168,162,.12), transparent 60%),
-    rgba(255,255,255,.02);
+  margin-top: 8rem;
+  padding: 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Footer */
-.section--footer{ padding-top: 40px; }
-.footer{
-  display:flex;
-  justify-content: space-between;
-  gap: 14px;
-  align-items: center;
-  border-top:1px solid var(--line);
-  padding-top: 24px;
-  padding-bottom: 40px;
+.reader-title {
+  font-family: var(--serif);
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
-.sig__name{ margin:0; font-family: var(--serif); font-size: 18px; }
-.sig__meta{ margin:4px 0 0; color: var(--muted); font-size: 13px; }
 
-.links a{
-  color: rgba(233,230,223,.75);
-  font-size: 13px;
-  border:1px solid var(--line);
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.02);
+.reader-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+  flex-wrap: wrap;
 }
-.links a:hover{ text-decoration:none; border-color: rgba(255,255,255,.25); }
 
-@media (max-width: 900px){
-  .grid{ grid-template-columns: 1fr; }
-  .quote p{ font-size: 17px; }
-  .quote--hero p{ font-size: 21px; }
+.btn-ghost {
+  display: inline-block;
+  padding: 12px 30px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+.btn-ghost:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+}
+
+.end-mark { text-align: center; margin-top: 6rem; }
+.home-link { color: var(--muted); font-size: 0.9rem; transition: 0.3s; }
+.home-link:hover { color: var(--accent); }
+
+/* MOBİL İÇİN ÖZEL AYARLAR (O eziyeti bitiren kod) */
+@media (max-width: 768px) {
+  .page { padding: 0 1.2rem 4rem; }
+  .quote { margin: 3rem 0; width: 100%; max-width: 100%; }
+  .quote p { font-size: 1.2rem; }
   .intro-title { font-size: 3.5rem; }
-}
-
-/* ========================================= */
-/* === SİTE GENELİ ATMOSFER GÜNCELLEMESİ === */
-/* ========================================= */
-
-/* 1. PAS RENGİ KAYDIRMA ÇUBUĞU */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--accent); /* Pas rengi */
-  border-radius: 5px;
-  border: 2px solid var(--bg);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(212,163,115, .8);
-}
-
-/* 2. PAS RENGİ METİN SEÇİMİ */
-::selection {
-  background: var(--accent);
-  color: var(--bg);
-}
-::-moz-selection {
-  background: var(--accent);
-  color: var(--bg);
-}
-/* === ZARİF KAYDIRMA ÇUBUĞU === */
-::-webkit-scrollbar {
-  width: 8px; /* Çok ince */
-}
-::-webkit-scrollbar-track {
-  background: #080808; /* Arka planla aynı renk */
-}
-::-webkit-scrollbar-thumb {
-  background: #444; /* İlk başta sönük */
-  border-radius: 4px;
-  transition: background 0.3s;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #d4a373; /* Üzerine gelince parlasın (Pas Rengi) */
+  .divider { margin: 3rem 0; }
+  .q-left, .q-right { text-align: left; border-left: 2px solid var(--accent); border-right: none; }
 }
