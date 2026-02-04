@@ -285,3 +285,28 @@ body {
   .divider { margin: 3rem 0; }
   .q-left, .q-right { text-align: left; border-left: 2px solid var(--accent); border-right: none; }
 }
+/* ========================================= */
+/* === ÖZEL KAYDIRMA ÇUBUĞU (SCROLLBAR) === */
+/* ========================================= */
+
+/* Çubuğun genişliği */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Çubuğun yolu (Arka plan - Sayfa rengiyle aynı) */
+::-webkit-scrollbar-track {
+  background: var(--bg); 
+}
+
+/* Çubuğun kendisi (Hareket eden kısım - Koyu Gri) */
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 4px;
+  border: 1px solid var(--bg); /* Kenarlardan hafif ayrık dursun */
+}
+
+/* Üzerine gelince parlasın (Pas Rengi) */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent); 
+}
