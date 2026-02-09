@@ -97,57 +97,61 @@
   <audio id="bg-music" loop>
     <source src="./muzik.mp3" type="audio/mpeg">
   </audio>
-  <script>
-    // === GİRİŞ ve ANİMASYON SCRIPT'İ ===
+<script>
+    // ==========================================
+    // 1. GİRİŞ EKRANI (INTRO) VE SCROLL KİLİDİ
+    // ==========================================
     const introScreen = document.getElementById('intro-screen');
     const startBtn = document.getElementById('start-btn');
     const mainPage = document.getElementById('mainPage');
 
-    // 1. Scroll Kilidi (Başlangıçta)
+    // Başlangıçta sayfayı kilitle (Aşağı inemesinler)
     document.body.style.overflow = 'hidden';
 
-    // 2. Buton Tıklaması
+    // "Hikayeye Dokun" Butonuna Basınca:
     startBtn.addEventListener('click', () => {
+      // 1. Giriş ekranını sönükleştir
       introScreen.classList.add('fade-out');
-      mainPage.classList.add('visible');
-      document.body.style.overflow = 'auto'; // Kilidi aç
       
+      // 2. Ana sayfayı görünür yap
+      mainPage.classList.add('visible');
+      
+      // 3. Kilidi aç (Artık kaydırabilir)
+      document.body.style.overflow = 'auto'; 
+      
+      // 4. Ekranı tamamen yok et (1.5 saniye sonra)
       setTimeout(() => {
         introScreen.style.display = 'none';
       }, 1500);
     });
 
-    // 3. Scroll Animasyonu (Kutuların gelişi)
+    // ==========================================
+    // 2. SCROLL ANİMASYONU (Kutuların Gelişi)
+    // ==========================================
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          observer.unobserve(entry.target); // Bir kere görünce takibi bırak
         }
       });
-    }, { threshold: 0.1 }); // Kutunun %10'u görününce tetikle
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.quote').forEach(quote => observer.observe(quote));
-// ... (Üstteki animasyon kodları kalsın) ...
 
-    // === MÜZİK OYNATICI VE SESSİZLİK SENSÖRÜ ===
+
+    // ==========================================
+    // 3. MÜZİK OYNATICI VE PLAK AYARLARI
+    // ==========================================
     const musicTrigger = document.getElementById('music-trigger');
     const music = document.getElementById('bg-music');
-    // === MÜZİK OYNATICI VE SESSİZLİK SENSÖRÜ ===
-    const musicTrigger = document.getElementById('music-trigger');
-    const music = document.getElementById('bg-music');
+    const disc = document.getElementById('disc');
+    const hint = document.querySelector('.music-hint');
     
-    // BURAYA EKLE: Ses seviyesi %50 olsun
+    // Ses Seviyesi: %50 (İsteğin üzerine)
     music.volume = 0.5; 
 
-    const disc = document.getElementById('disc');
-    const hint = document.querySelector('.music-hint');
-    
-    // ... (Kodlar devam ediyor) ...
-    const disc = document.getElementById('disc');
-    const hint = document.querySelector('.music-hint');
-
-    // 1. Tıklayınca Çal/Durur
+    // Tıklayınca Çal/Durdur
     musicTrigger.addEventListener('click', () => {
       if (music.paused) {
         music.play();
@@ -161,20 +165,24 @@
       }
     });
 
-    // 2. Müzik bitince (Döngüde gerçi ama olsun)
+    // Müzik bitince başa sar
     music.addEventListener('ended', () => {
       disc.classList.remove('playing');
       hint.textContent = "Tekrarla";
     });
 
-    // 3. SESSİZLİK SENSÖRÜ (Sekme değişirse sussun)
+    // ==========================================
+    // 4. SESSİZLİK SENSÖRÜ (Sekme Değişirse)
+    // ==========================================
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
+        // Kullanıcı başka sekmeye gitti
         music.pause();
         disc.classList.remove('playing');
-        document.title = "Sessizlik..."; // Sekme adını değiştir
+        document.title = "Sessizlik..."; 
       } else {
-        document.title = "Turuncu Saçlı Kız — Berkay Alay"; // Geri gelince düzelt
+        // Geri geldi (Müzik otomatik başlamaz, kendi basmalı)
+        document.title = "Turuncu Saçlı Kız — Berkay Alay"; 
       }
     });
   </script>
