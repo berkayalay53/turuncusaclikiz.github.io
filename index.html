@@ -105,7 +105,7 @@
     const startBtn = document.getElementById('start-btn');
     const mainPage = document.getElementById('mainPage');
 
-    // Başlangıçta sayfayı kilitle (Aşağı inemesinler)
+    // Başlangıçta sayfayı kilitle
     document.body.style.overflow = 'hidden';
 
     // "Hikayeye Dokun" Butonuna Basınca:
@@ -113,26 +113,28 @@
       // 1. Giriş ekranını sönükleştir
       introScreen.classList.add('fade-out');
       
-      // 2. Ana sayfayı görünür yap
-      mainPage.classList.add('visible');
+      // 2. ANAHTAR HAMLE (Çifte Garanti)
+      // CSS dosyasında hangisi varsa o çalışsın diye ikisini de ekliyoruz.
+      mainPage.classList.add('visible'); 
+      mainPage.classList.add('content-visible');
       
-      // 3. Kilidi aç (Artık kaydırabilir)
+      // 3. Kilidi aç
       document.body.style.overflow = 'auto'; 
       
-      // 4. Ekranı tamamen yok et (1.5 saniye sonra)
+      // 4. Ekranı tamamen yok et
       setTimeout(() => {
         introScreen.style.display = 'none';
       }, 1500);
     });
 
     // ==========================================
-    // 2. SCROLL ANİMASYONU (Kutuların Gelişi)
+    // 2. SCROLL ANİMASYONU (Yazıların Gelişi)
     // ==========================================
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Bir kere görünce takibi bırak
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1 });
@@ -148,7 +150,7 @@
     const disc = document.getElementById('disc');
     const hint = document.querySelector('.music-hint');
     
-    // Ses Seviyesi: %50 (İsteğin üzerine)
+    // Ses Seviyesi: %50
     music.volume = 0.5; 
 
     // Tıklayınca Çal/Durdur
@@ -176,12 +178,10 @@
     // ==========================================
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        // Kullanıcı başka sekmeye gitti
         music.pause();
         disc.classList.remove('playing');
         document.title = "Sessizlik..."; 
       } else {
-        // Geri geldi (Müzik otomatik başlamaz, kendi basmalı)
         document.title = "Turuncu Saçlı Kız — Berkay Alay"; 
       }
     });
