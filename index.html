@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+  <meta name="theme-color" content="#0f1113">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="preload" href="./style.css" as="style">
+<link rel="preload" href="./profile.jpg" as="image">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
@@ -186,6 +191,28 @@
       }
     });
   </script>
+<script>
+  // === SAYFA YÜKLENME YÖNETİCİSİ ===
+  
+  // 1. Tarayıcı önbelleğinden (Geri butonuyla) geliniyorsa sayfayı yenileme sorunu olmasın
+  window.addEventListener("pageshow", function(event) {
+    if (event.persisted) {
+      document.body.classList.add('loaded');
+      document.body.style.opacity = "1";
+    }
+  });
 
+  // 2. Her şey yüklendiğinde (Resimler, CSS) perdeyi aç
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded'); // CSS'teki .loaded opacity:1 yapar
+    // Eğer toz efekti varsa başlat (Yoksa hata vermez, geçer)
+    if (typeof createDust === "function") createDust(); 
+  });
+  
+  // 3. Güvenlik Sübabı: Eğer 3 saniye içinde yüklenmezse zorla aç (Karanlıkta kalmasınlar)
+  setTimeout(() => {
+    document.body.classList.add('loaded');
+  }, 3000);
+</script>
 </body>
 </html>
