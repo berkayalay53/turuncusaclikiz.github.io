@@ -1,3 +1,13 @@
+/* BAŞLANGIÇTA GİZLE, YÜKLENİNCE GÖSTER */
+body {
+  opacity: 0; /* Başta görünmez */
+  transition: opacity 0.8s ease-in-out; /* 0.8 saniyede yavaşça belirir */
+  background-color: #0f1113; /* Yüklenirken arkada siyah fon dursun */
+}
+
+body.loaded {
+  opacity: 1 !important; /* Yüklendiğinde görünür olsun */
+}
 /* === GENEL AYARLAR === */
 :root {
   --bg: #0f1113;
