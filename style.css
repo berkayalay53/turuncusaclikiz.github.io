@@ -1,3 +1,7 @@
+/* === MAVİ YERİNE BİZİM PAS RENGİ YANSIN === */
+* {
+  -webkit-tap-highlight-color: rgba(212, 163, 115, 0.3); /* %30 Opaklıkta Pas Rengi */
+}
 /* BAŞLANGIÇTA GİZLE, YÜKLENİNCE GÖSTER */
 body {
   opacity: 0; /* Başta görünmez */
