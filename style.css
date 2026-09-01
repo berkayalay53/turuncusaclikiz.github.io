@@ -31,7 +31,21 @@ body {
   line-height: 1.8;
   overflow-x: hidden; /* Yatay taşmayı engelle */
 }
+/* BAŞLANGIÇTA GİZLE, YÜKLENİNCE GÖSTER */
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
 
+body {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  background-color: #0f1113;
+}
+
+body.loaded {
+  opacity: 1 !important;
+}
 /* 1. PAS RENGİ KAYDIRMA ÇUBUĞU */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
