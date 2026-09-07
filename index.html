@@ -2,10 +2,13 @@
 <html lang="tr">
 <head>
   <meta name="theme-color" content="#0f1113">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<link rel="preload" href="./style.css" as="style">
-<link rel="preload" href="./profile.jpg" as="image">
+  <!-- Kritik Varlıkların Ön Yüklemesi (Eksiksiz & Tekil) -->
+  <link rel="preload" href="./style.css" as="style">
+  <link rel="preload" href="./cover.jpg" as="image">
+  <link rel="preload" href="./kralkaybederse.jpg" as="image">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Turuncu Saçlı Kız — Berkay Alay</title>
@@ -19,9 +22,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="./style.css">
-  <link rel="preload" href="./style.css" as="style">
-  <link rel="preload" href="./cover.jpg" as="image">
-  <link rel="preload" href="./kralkaybederse.jpg" as="image">
 </head>
 <body>
 
@@ -79,13 +79,14 @@
       <p style="color: #bbb; margin-bottom: 20px;">Gökyüzü o eşsiz turuncuya büründüğünde, yarım kalmış bir vasiyetin izini sürmek için...</p>
       
       <div class="book-actions">
-  <a href="https://play.google.com/books/reader?id=OSnJEQAAQBAJ&pg=GBS.PP1&hl=tr" class="btn-secondary" target="_blank">
-    Ücretsiz Ön İzleme
-  </a>
-  <a href="https://play.google.com/store/books/details/Berkay_Alay_Turuncu_Sa%C3%A7l%C4%B1_K%C4%B1z?id=OSnJEQAAQBAJ" class="btn-primary" target="_blank">
-    Tam Sürümü Edinin
-  </a>
-</div>
+        <a href="https://play.google.com/books/reader?id=OSnJEQAAQBAJ&pg=GBS.PP1&hl=tr" class="btn-secondary" target="_blank">
+          Ücretsiz Ön İzleme
+        </a>
+        <a href="https://play.google.com/store/books/details/Berkay_Alay_Turuncu_Sa%C3%A7l%C4%B1_K%C4%B1z?id=OSnJEQAAQBAJ" class="btn-primary" target="_blank">
+          Tam Sürümü Edinin
+        </a>
+      </div>
+    </div>
 
     <section class="quote q-center" style="margin-top: 4rem; border: none;">
       <p>“Eğer bir gün yolda yürürken hafifçe rüzgâr eserse ve sen istemsizce sol yanağına dokunursan… bil ki o ben olacağım.”</p>
@@ -96,7 +97,8 @@
     </div>
 
   </main>
-<div class="music-control" id="music-trigger">
+
+  <div class="music-control" id="music-trigger">
     <div class="disc-wrapper">
       <div class="disc" id="disc">
         <img src="./kralkaybederse.jpg" alt="Müzik Plağı" draggable="false">
@@ -105,10 +107,12 @@
     <span class="music-hint">Melodiyi dinle...</span>
   </div>
 
-  <audio id="bg-music" loop>
+  <!-- preload="auto" ile müzik dosyasını arkada tam hazırlar -->
+  <audio id="bg-music" loop preload="auto">
     <source src="./muzik.mp3" type="audio/mpeg">
   </audio>
-<script>
+
+  <script>
     const introScreen = document.getElementById('intro-screen');
     const startBtn = document.getElementById('start-btn');
     const mainPage = document.getElementById('mainPage');
@@ -118,14 +122,32 @@
 
     document.body.style.overflow = 'hidden';
 
-    // Giriş Butonu ve Fade-in Mekanizması
+    // === EKSİKSİZ VE TAM YÜKLENME DENETİMİ ===
+    function completePageLoad() {
+      if (!document.body.classList.contains('loaded')) {
+        document.body.classList.add('loaded');
+        if (typeof createDust === "function") createDust();
+      }
+    }
+
+    // Tüm görseller, fontlar ve stil dosyaları TAM indiğinde tetiklenir
+    window.addEventListener('load', completePageLoad);
+
+    // Geri butonu ile gelindiğinde önbellek durumunu korur
+    window.addEventListener('pageshow', (event) => {
+      completePageLoad();
+    });
+
+    // Ağda beklenmedik takılma olursa sayfayı karanlıkta bırakmama garantisi (4 sn)
+    setTimeout(completePageLoad, 4000);
+
+    // Giriş Butonu ve Perde Açılışı
     startBtn.addEventListener('click', () => {
       music.volume = 0;
       music.play().catch(error => console.log("Oynatma engellendi:", error));
       
       let fadeIn = setInterval(() => {
         if (music.volume < 0.2) {
-          // Sayı hassasiyeti için küçük bir düzeltme
           let newVol = music.volume + 0.01;
           music.volume = Math.min(newVol, 0.2);
         } else {
@@ -134,15 +156,19 @@
       }, 150);
 
       disc.classList.add('playing');
-      if(hint) hint.textContent = "Çalıyor...";
+      if (hint) hint.textContent = "Çalıyor...";
 
       introScreen.classList.add('fade-out');
       mainPage.classList.add('visible');
+      
+      // Butona dokunulduğu an sayfa akışı serbest kalır
       document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+
       setTimeout(() => { introScreen.style.display = 'none'; }, 1500);
     });
 
-    // Kaydırma İzleyici (Alıntıların belirmesi için gerekli)
+    // Alıntıların Kaydırırken Belirmesi
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -158,41 +184,13 @@
       if (music.paused) {
         music.play();
         disc.classList.add('playing');
-        hint.textContent = "Çalıyor...";
+        if (hint) hint.textContent = "Çalıyor...";
       } else {
         music.pause();
         disc.classList.remove('playing');
-        hint.textContent = "Duraklatıldı";
+        if (hint) hint.textContent = "Duraklatıldı";
       }
     });
-
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-    });
   </script>
-<script>
-  // === SAYFA YÜKLENME YÖNETİCİSİ ===
-  
-  // 1. Tarayıcı önbelleğinden (Geri butonuyla) geliniyorsa sayfayı yenileme sorunu olmasın
-  window.addEventListener("pageshow", function(event) {
-    if (event.persisted) {
-      document.body.classList.add('loaded');
-      document.body.style.opacity = "1";
-    }
-  });
-
-  // 2. Her şey yüklendiğinde (Resimler, CSS) perdeyi aç
-  window.addEventListener('load', () => {
-    document.body.classList.add('loaded'); // CSS'teki .loaded opacity:1 yapar
-    // Eğer toz efekti varsa başlat (Yoksa hata vermez, geçer)
-    if (typeof createDust === "function") createDust(); 
-  });
-  
-  // 3. Güvenlik Sübabı: Eğer 3 saniye içinde yüklenmezse zorla aç (Karanlıkta kalmasınlar)
-  setTimeout(() => {
-    document.body.classList.add('loaded');
-  }, 3000);
-  
-</script>
 </body>
 </html>
